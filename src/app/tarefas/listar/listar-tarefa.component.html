@@ -13,12 +13,18 @@
       </th>
     </tr>
     <tr *ngFor="let tarefa of tarefas">
-      <td [class.success]="!tarefa.concluded">{{ tarefa.name }}</td>
+      <td
+        [class.success]="!tarefa.concluded"
+        [tarefaConcluida]="tarefa.concluded"
+      >
+        {{ tarefa.name }}
+      </td>
       <td style="width: 70px" class="text-center">
         <input
           type="checkbox"
           [value]="tarefa.id"
           [checked]="tarefa.concluded"
+          (click)="alterarStatus(tarefa)"
         />
       </td>
       <td class="text-center" style="width: 200px">
@@ -37,6 +43,7 @@
           title="Remover"
           alt="Remover"
           class="btn btn-xs btn-danger"
+          (click)="remover($event, tarefa)"
         >
           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
           Remover
